@@ -1,0 +1,158 @@
+---@meta
+
+---Key codes by name, e.g. `keyboard.keys.enter` is `0x1C`, and key names by code, e.g. `keyboard.keys[0x1C]` is `"enter"`.
+---Key codes are the `code` argument of `key_down`/`key_up` events: `local _, _, char, code = event.pull("key_down")`.
+---@class KeyboardKeys
+---@field [integer] string|nil name of the key with this code, `nil` if the code has no name
+---@field ["1"] integer `0x02`
+---@field ["2"] integer `0x03`
+---@field ["3"] integer `0x04`
+---@field ["4"] integer `0x05`
+---@field ["5"] integer `0x06`
+---@field ["6"] integer `0x07`
+---@field ["7"] integer `0x08`
+---@field ["8"] integer `0x09`
+---@field ["9"] integer `0x0A`
+---@field ["0"] integer `0x0B`
+---@field a integer `0x1E`
+---@field b integer `0x30`
+---@field c integer `0x2E`
+---@field d integer `0x20`
+---@field e integer `0x12`
+---@field f integer `0x21`
+---@field g integer `0x22`
+---@field h integer `0x23`
+---@field i integer `0x17`
+---@field j integer `0x24`
+---@field k integer `0x25`
+---@field l integer `0x26`
+---@field m integer `0x32`
+---@field n integer `0x31`
+---@field o integer `0x18`
+---@field p integer `0x19`
+---@field q integer `0x10`
+---@field r integer `0x13`
+---@field s integer `0x1F`
+---@field t integer `0x14`
+---@field u integer `0x16`
+---@field v integer `0x2F`
+---@field w integer `0x11`
+---@field x integer `0x2D`
+---@field y integer `0x15`
+---@field z integer `0x2C`
+---@field apostrophe integer `0x28`
+---@field at integer `0x91`
+---@field back integer `0x0E`, backspace
+---@field backslash integer `0x2B`
+---@field capital integer `0x3A`, Caps Lock
+---@field colon integer `0x92`
+---@field comma integer `0x33`
+---@field enter integer `0x1C`
+---@field equals integer `0x0D`
+---@field grave integer `0x29`, grave accent
+---@field lbracket integer `0x1A`
+---@field lcontrol integer `0x1D`, left Ctrl
+---@field lmenu integer `0x38`, left Alt
+---@field lshift integer `0x2A`, left Shift
+---@field minus integer `0x0C`
+---@field numlock integer `0x45`
+---@field pause integer `0xC5`
+---@field period integer `0x34`
+---@field rbracket integer `0x1B`
+---@field rcontrol integer `0x9D`, right Ctrl
+---@field rmenu integer `0xB8`, right Alt
+---@field rshift integer `0x36`, right Shift
+---@field scroll integer `0x46`, Scroll Lock
+---@field semicolon integer `0x27`
+---@field slash integer `0x35`, `/` on the main keyboard
+---@field space integer `0x39`
+---@field stop integer `0x95`
+---@field tab integer `0x0F`
+---@field underline integer `0x93`
+---@field up integer `0xC8`
+---@field down integer `0xD0`
+---@field left integer `0xCB`
+---@field right integer `0xCD`
+---@field home integer `0xC7`
+---@field ["end"] integer `0xCF`
+---@field pageUp integer `0xC9`
+---@field pageDown integer `0xD1`
+---@field insert integer `0xD2`
+---@field delete integer `0xD3`
+---@field f1 integer `0x3B`
+---@field f2 integer `0x3C`
+---@field f3 integer `0x3D`
+---@field f4 integer `0x3E`
+---@field f5 integer `0x3F`
+---@field f6 integer `0x40`
+---@field f7 integer `0x41`
+---@field f8 integer `0x42`
+---@field f9 integer `0x43`
+---@field f10 integer `0x44`
+---@field f11 integer `0x57`
+---@field f12 integer `0x58`
+---@field f13 integer `0x64`
+---@field f14 integer `0x65`
+---@field f15 integer `0x66`
+---@field f16 integer `0x67`
+---@field f17 integer `0x68`
+---@field f18 integer `0x69`
+---@field f19 integer `0x71`
+---@field kana integer `0x70` (Japanese keyboards)
+---@field kanji integer `0x94` (Japanese keyboards)
+---@field convert integer `0x79` (Japanese keyboards)
+---@field noconvert integer `0x7B` (Japanese keyboards)
+---@field yen integer `0x7D` (Japanese keyboards)
+---@field circumflex integer `0x90` (Japanese keyboards)
+---@field ax integer `0x96` (Japanese keyboards)
+---@field numpad0 integer `0x52`
+---@field numpad1 integer `0x4F`
+---@field numpad2 integer `0x50`
+---@field numpad3 integer `0x51`
+---@field numpad4 integer `0x4B`
+---@field numpad5 integer `0x4C`
+---@field numpad6 integer `0x4D`
+---@field numpad7 integer `0x47`
+---@field numpad8 integer `0x48`
+---@field numpad9 integer `0x49`
+---@field numpadmul integer `0x37`
+---@field numpaddiv integer `0xB5`
+---@field numpadsub integer `0x4A`
+---@field numpadadd integer `0x4E`
+---@field numpaddecimal integer `0x53`
+---@field numpadcomma integer `0xB3`
+---@field numpadenter integer `0x9C`, Enter on the numpad
+---@field numpadequals integer `0x8D`
+
+---The keyboard library (`require("keyboard")`): key codes by name (`keyboard.keys`) and the state of the
+---keys, which OpenOS tracks from the `key_down`/`key_up` events of all keyboards.
+---@class keyboardlib
+---@field keys KeyboardKeys key codes by name, and key names by code
+---@field pressedChars table<integer, boolean> characters (code points) currently held down
+---@field pressedCodes table<integer, boolean> key codes currently held down
+local keyboard = {}
+
+---Checks if one of the Alt keys is currently held down.
+---@return boolean|nil down `true` if held down, `nil` otherwise
+function keyboard.isAltDown() end
+
+---Checks if a character (e.g. from a `key_down` event) is a control character, i.e. not printable.
+---@param char number character code
+---@return boolean
+function keyboard.isControl(char) end
+
+---Checks if one of the Control keys is currently held down.
+---@return boolean|nil down `true` if held down, `nil` otherwise
+function keyboard.isControlDown() end
+
+---Checks if a key is currently held down. A number is a key code (see `keyboard.keys`),
+---a string is a single character (as passed by keyboard events).
+---@param charOrCode string|number
+---@return boolean|nil down `true` if held down, `nil` otherwise
+function keyboard.isKeyDown(charOrCode) end
+
+---Checks if one of the Shift keys is currently held down.
+---@return boolean|nil down `true` if held down, `nil` otherwise
+function keyboard.isShiftDown() end
+
+return keyboard
