@@ -5,7 +5,7 @@ local harvest = require("functions.harvest")
 local chest = require("functions.chest")
 
 -- Настройки
-local FIELD_SIZE = 9         -- сторона квадратного поля, в клетках
+local FIELD_SIZE = 23         -- сторона квадратного поля, в клетках
 local SEED_SLOT = 1          -- слот с семенами: ими засеиваем поле, в сундук их не выгружаем
 local HOME_WAYPOINT = "home" -- подпись вейпоинта, к которому робот возвращается
 local SLEEP_SECONDS = 600    -- пауза между обходами (10 минут)

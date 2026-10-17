@@ -5,7 +5,7 @@ local sides = require("sides")
 ---@class FarmNav
 local nav = {}
 
-local WAYPOINT_SEARCH_RANGE = 40 -- в блоках
+local WAYPOINT_SEARCH_RANGE = 60 -- в блоках
 
 ---Крутит робота направо, пока он не посмотрит в нужную сторону света (sides.north, sides.east…).
 local function turnTo(side)
