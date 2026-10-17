@@ -31,7 +31,9 @@ local function harvestCycle()
     -- выгружать урожай где попало нельзя
     nav.returnToHome(HOME_WAYPOINT)
     robot.down()
-    chest.unloadStorage(SEED_SLOT)
+    if not chest.findAndUnload(SEED_SLOT) then
+        print("Сундук не найден: урожай остаётся в роботе")
+    end
 end
 
 while true do
